@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: vardschema-postgres
+    environment:
+      POSTGRES_DB: vardschema
+      POSTGRES_USER: vardschema_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - vardschema_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  vardschema_postgres_data:

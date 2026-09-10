@@ -1,5 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using VardSchema.Api.Data;
 var builder = WebApplication.CreateBuilder(args);
+var connectionString =
+    builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException(
+        "Connection string 'DefaultConnection' was not found.");
 
+builder.Services.AddDbContext<VardSchemaDbContext>(options =>
+    options.UseNpgsql(connectionString));
 // Add services to the container.
 
 builder.Services.AddControllers();
